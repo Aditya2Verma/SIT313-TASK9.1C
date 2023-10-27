@@ -1,0 +1,40 @@
+.Top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 70px;
+    border: 7px solid skyblue;
+  
+    color: rgb(15, 15, 15);
+    margin-top: 20px;
+}
+
+.Top button{
+    padding: 10px 30px;
+}
+
+.btn1{
+    margin: 0px 10px;
+}
+
+
+
+
+.Home{
+    color: rgb(12, 12, 12);
+    text-decoration: none;
+}
+
+html{
+    background-color: white;
+}
+
+
+.searchBar{
+    margin: 0px 15px;
+}
+
+.searchBar input{
+    padding: 10px 150px;
+}
