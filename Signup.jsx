@@ -14,16 +14,44 @@ function Signup() {
   });
 
   const { displayName, email, password, confirmPassword } = contact;
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
 
   async function handleClick(event) {
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
+    const newErrors = {};
+
+    if (!displayName) {
+      newErrors.displayName = 'Name is required';
+    } else {
+      newErrors.displayName = '';
     }
 
-    if (!displayName || !email || !password || !confirmPassword) {
-      setError('Please fill in all fields.');
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else {
+      newErrors.email = '';
+    }
+
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else {
+      newErrors.password = '';
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    } else {
+      newErrors.confirmPassword = '';
+    }
+
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some(error => error)) {
       return;
     }
 
@@ -40,12 +68,10 @@ function Signup() {
     const value = event.target.value;
     const name = event.target.name;
 
-    setcontact(prevValue => {
-      return {
-        ...prevValue,
-        [name]: value
-      };
-    });
+    setcontact(prevValue => ({
+      ...prevValue,
+      [name]: value
+    }));
   }
 
   return (
@@ -54,49 +80,59 @@ function Signup() {
       <div className="main">
         <div className="d">
           <p>Name</p>
-          <Input
-            name="displayName"
-            type="text"
-            placeholder="Enter name"
-            onChange={handlepass}
-          />
+          <div>
+            <Input
+              name="displayName"
+              type="text"
+              placeholder="Enter name"
+              onChange={handlepass}
+            />
+            <div className="error">{errors.displayName}</div>
+          </div>
         </div>
         <br></br>
 
         <div className="d">
           <p>Email</p>
-          <Input
-            name="email"
-            type="email"
-            placeholder="Enter email"
-            onChange={handlepass}
-          />
+          <div>
+            <Input
+              name="email"
+              type="email"
+              placeholder="Enter email"
+              onChange={handlepass}
+            />
+            <div className="error">{errors.email}</div>
+          </div>
         </div>
         <br></br>
 
         <div className="d1">
           <p>Password</p>
-          <Input
-            name="password"
-            type="password"
-            placeholder="Enter password"
-            onChange={handlepass}
-          />
+          <div>
+            <Input
+              name="password"
+              type="password"
+              placeholder="Enter password"
+              onChange={handlepass}
+            />
+            <div className="error">{errors.password}</div>
+          </div>
         </div>
         <br></br>
         <div className="d1">
           <p>Confirm</p>
-          <Input
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            onChange={handlepass}
-          />
+          <div>
+            <Input
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              onChange={handlepass}
+            />
+            <div className="error">{errors.confirmPassword}</div>
+          </div>
         </div>
         <br></br>
         
-        {error && <div className="error">{error}</div>}
-
         <button onClick={handleClick} className="btn">
           Signup
         </button>
@@ -106,3 +142,5 @@ function Signup() {
 }
 
 export default Signup;
+
+//a
